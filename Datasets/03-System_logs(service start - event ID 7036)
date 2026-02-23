@@ -1,0 +1,6 @@
+EventID: 7036
+Source: Service Control Manager
+Level: Information
+Description: The Print Spooler service entered the running state.
+Time: 2026-02-23 09:00:12 AM
+Computer: SRV-PROD-01
