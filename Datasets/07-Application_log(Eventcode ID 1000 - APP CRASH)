@@ -1,0 +1,18 @@
+02/23/2026 10:05:12 AM
+LogName=Application
+SourceName=Application Error
+EventCode=1000
+EventType=2
+Type=Error
+ComputerName=SRV-ANON-APP01
+User=ANON-USER-A
+ID=1000
+Message=Faulting application name: excel.exe, version: 16.0.12345.67890, time stamp: 0x5e2b1c2d
+Faulting module name: ntdll.dll, version: 10.0.19041.1202, time stamp: 0x4d5e6f7a
+Exception code: 0xc0000005
+Fault offset: 0x0000000000021a3b
+Faulting process id: 0x1a2c
+Faulting application start time: 0x01d7e4a5b6c7d8e9
+Faulting application path: C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE
+Faulting module path: C:\Windows\SYSTEM32\ntdll.dll
+Report Id: b1c2d3e4-5f6a-7b8c-9d0e-f1a2b3c4d5e6
