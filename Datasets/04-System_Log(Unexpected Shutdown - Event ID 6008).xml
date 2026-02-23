@@ -1,0 +1,12 @@
+<Event xmlns="http://schemas.microsoft.com">
+  <System>
+    <Provider Name="EventLog" />
+    <EventID>6008</EventID>
+    <Level>2</Level> <!-- Error -->
+    <Computer>HOME-PC</Computer>
+    <TimeCreated SystemTime="2026-02-22T22:45:00Z" />
+  </System>
+  <EventData>
+    <Data>The previous system shutdown at 10:40:12 PM on 2/22/2026 was unexpected.</Data>
+  </EventData>
+</Event>
