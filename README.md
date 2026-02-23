@@ -139,7 +139,7 @@ Assigns a threat score for analyst prioritization
 ![Splunk](https://img.shields.io/badge/Splunk-Enterprise%20Free-green)
 
 
-Maintained by [Denis O. Onduso] • • [GitHub Profile](https://github.com/denis541) • • [Email](Denis.Onduso@outlook.com).
+Maintained by [Denis O. Onduso] • • [GitHub Profile](https://github.com/denis541) • • Email: Denis.Onduso@outlook.com.
 
 If you found this project useful, please consider giving it a ⭐ on GitHub!
 
