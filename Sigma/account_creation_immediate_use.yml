@@ -1,0 +1,25 @@
+title: Account Creation and Immediate Use
+id: 55555555-5555-5555-5555-555555555555
+status: experimental
+description: Detects newly created accounts used shortly after creation
+author: [Your Name]
+date: 2024-01-01
+tags:
+  - attack.persistence
+  - attack.t1136
+logsource:
+  product: windows
+  service: security
+detection:
+  account_creation:
+    EventID: 4720  # User created
+  account_use:
+    EventID: 4624  # Successful login
+  timeframe: 1h
+  condition: 
+    - account_creation
+    - account_use
+    - within timeframe
+falsepositives:
+  - Normal account provisioning workflows
+level: high

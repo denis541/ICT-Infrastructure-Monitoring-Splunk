@@ -1,0 +1,25 @@
+title: Suspicious PowerShell Execution Patterns
+id: 87654321-4321-4321-4321-210987654321
+status: test
+description: Detects suspicious PowerShell execution patterns commonly used in attacks
+author: [Your Name]
+date: 2024-01-01
+tags:
+  - attack.execution
+  - attack.t1059.001
+logsource:
+  product: windows
+  service: powershell
+detection:
+  selection:
+    ScriptBlockText|contains:
+      - '-EncodedCommand'
+      - 'Invoke-Expression'
+      - 'DownloadString'
+      - 'IEX'
+      - 'FromBase64String'
+  condition: selection
+falsepositives:
+  - Legitimate administrative scripts
+  - Security tooling
+level: high

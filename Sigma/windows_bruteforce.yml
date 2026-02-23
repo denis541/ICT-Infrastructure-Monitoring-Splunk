@@ -1,0 +1,26 @@
+title: Windows Brute Force Detection
+id: 12345678-1234-1234-1234-123456789012
+status: experimental
+description: Detects multiple failed Windows logins from a single source
+author: [Your Name]
+date: 2024-01-01
+modified: 2024-01-15
+tags:
+  - attack.credential_access
+  - attack.t1110.001
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    EventID: 4625  # Failed login
+    LogonType: 
+      - 3   # Network
+      - 10  # RemoteInteractive
+  timeframe: 15m
+  condition: selection | count() by SourceIpAddress, TargetUserName > 7
+falsepositives:
+  - Service account password changes
+  - Legitimate user lockouts
+  - Penetration testing
+level: medium
