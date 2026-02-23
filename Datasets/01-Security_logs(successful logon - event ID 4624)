@@ -1,0 +1,13 @@
+EventID: 4624
+Source: Microsoft-Windows-Security-Auditing
+Level: Information
+Description: An account was successfully logged on.
+Subject:
+    Security ID: SYSTEM
+    Account Name: WORKSTATION-01$
+Logon Information:
+    Logon Type: 2 (Interactive)
+New Logon:
+    Account Name: JohnDoe
+    Account Domain: MYDOMAIN
+    Logon ID: 0x4B3A2
