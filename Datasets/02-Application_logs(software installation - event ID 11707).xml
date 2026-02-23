@@ -1,0 +1,13 @@
+<Event xmlns="http://schemas.microsoft.com">
+  <System>
+    <Provider Name="MsiInstaller" />
+    <EventID>11707</EventID>
+    <Level>4</Level> <!-- Information -->
+    <Task>0</Task>
+    <Computer>DESKTOP-CLIENT</Computer>
+    <TimeCreated SystemTime="2026-02-23T10:15:30Z" />
+  </System>
+  <EventData>
+    <Data>Product: Google Chrome -- Installation completed successfully.</Data>
+  </EventData>
+</Event>
