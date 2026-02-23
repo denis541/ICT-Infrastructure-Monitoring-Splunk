@@ -1,1 +1,91 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+venv/
+env/
+ENV/
+*.log
 
+# PowerShell
+*.ps1
+modules/
+
+# Splunk
+*.spl
+*.bak
+/opt/splunk/
+var/
+etc/apps/search/local/
+etc/users/
+etc/auth/
+etc/passwd
+etc/*.cfg
+
+# VM / Virtualization
+*.vmx
+*.vmdk
+*.vmsd
+*.nvram
+*.vmxf
+*.vmem
+*.vswp
+Virtual Machines/
+VMware/
+
+# Logs
+*.log
+logs/
+Logs/
+evidence/*.csv
+evidence/*.txt
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+
+# Local config
+.env
+.config
+*.local
+*.orig
+
+# Temp
+tmp/
+temp/
+*.tmp
+*.bak
+*.old
+
+# Credentials (never commit these)
+*.key
+*.pem
+*.cert
+*.crt
+secrets/
+credentials/
+passwords.txt
+
+# Large files
+*.iso
+*.ova
+*.ovf
+*.dmg
+*.pkg
+*.msi
+*.exe
+*.zip
+*.tar.gz
+*.7z
