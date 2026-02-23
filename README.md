@@ -11,7 +11,7 @@
 
 A production-grade infrastructure monitoring and security operations platform demonstrating enterprise IT observability and threat detection capabilities.
 
----
+--- 
 
 ## 🎯 Project Overview
 
