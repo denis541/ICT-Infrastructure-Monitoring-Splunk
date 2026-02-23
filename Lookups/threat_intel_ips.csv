@@ -1,0 +1,6 @@
+ip,type,threat_group,confidence,severity
+185.156.177.20,Scanner,Unknown,90,low
+45.33.32.156,C2_Server,Cobalt_Strike,100,critical
+103.14.26.190,Brute_Force,SSH_Botnet,75,medium
+194.26.192.34,Exfiltration,Ransomware_Group_X,95,high
+141.98.10.210,VPN_Exit,Tor_Node,80,medium
