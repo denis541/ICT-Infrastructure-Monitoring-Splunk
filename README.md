@@ -44,11 +44,10 @@ This implementation addresses logging and monitoring requirements under the **Ke
 A simplified, production-like environment built on a single host using virtualization.
 
 ```mermaid
-graph TD
-    A[Kali Linux<br/>Attacker VM] -->|Simulates Brute-Force| B[Windows 11<br/>Target VM]
-    B -->|Forwards Windows Event Logs| C[Splunk Enterprise<br/>SIEM VM]
-    C -->|Triggers Custom Alerts| D[Splunk Alert Manager]
-    D -->|Creates Actionable Incidents| E[Documented Response<br/>& Analysis]
+graph LR
+    A[Kali Linux] -->|Brute Force| B[Windows 11]
+    B -->|Event Logs| C[Splunk]
+    C -->|Alert| D[Analyst]
 ```
 ## Components
 
