@@ -1,0 +1,6 @@
+domain,category,status,last_seen,weight
+update-microsoft-office.com,Phishing,Active,2026-02-23,8
+secure-login-paypal.net,Credential_Theft,Active,2026-02-22,9
+fast-cdn-storage.xyz,Malware_Delivery,Suspicious,2026-02-20,5
+dev-api-github.io.ru,Data_Exfiltration,Malicious,2026-02-23,10
+login.accounts-verify.com,Phishing,Active,2026-02-21,7
