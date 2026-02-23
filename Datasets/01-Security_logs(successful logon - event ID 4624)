@@ -1,13 +1,37 @@
-EventID: 4624
-Source: Microsoft-Windows-Security-Auditing
-Level: Information
-Description: An account was successfully logged on.
+02/23/2026 09:12:45 AM
+LogName=Security
+SourceName=Microsoft Windows security auditing.
+EventCode=4625
+EventType=0
+Type=Information
+ComputerName=WKSTN-ANON-99.internal.corp
+User=NULL SID
+ID=4625
+Message=An account failed to log on.
+
 Subject:
-    Security ID: SYSTEM
-    Account Name: WORKSTATION-01$
-Logon Information:
-    Logon Type: 2 (Interactive)
-New Logon:
-    Account Name: JohnDoe
-    Account Domain: MYDOMAIN
-    Logon ID: 0x4B3A2
+	Security ID:		S-1-0-0
+	Account Name:		-
+	Account Domain:		-
+	Logon ID:		0x0
+
+Logon Type:			3
+
+Account For Which Logon Failed:
+	Security ID:		S-1-0-0
+	Account Name:		admin_service
+	Account Domain:		INTERNAL_DOMAIN
+
+Failure Information:
+	Failure Reason:		Unknown user name or bad password.
+	Status:			0xC000006D
+	Sub Status:		0xC000006A
+
+Process Information:
+	Caller Process ID:	0x0
+	Caller Process Name:	-
+
+Network Information:
+	Workstation Name:	WKSTN-ANON-99
+	Source Network Address:	192.168.1.155
+	Source Port:		54321
