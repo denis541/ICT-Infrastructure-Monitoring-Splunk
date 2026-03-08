@@ -1,106 +1,155 @@
-# Threat Modeling: Brute-Force Authentication Attacks (MITRE T1110.001)
+# Threat Modeling: Brute-Force Authentication Attacks
 
-## Executive Summary
-This document details the threat modeling process for brute-force authentication attacks, the primary use case implemented in this security lab. The analysis follows industry-standard frameworks to ensure comprehensive coverage and realistic implementation.
+**Analyst:** Denis O. Onduso  
+**Technique:** T1110.001 — Brute Force: Password Guessing  
+**Tactic:** Credential Access (TA0006)  
+**Frameworks:** MITRE ATT&CK, NIST SP 800-53, CIS Controls v8
+
+---
+
+## Objective
+
+Model the threat of brute-force authentication attacks against Windows and Linux endpoints — profiling the adversary, analysing the attack path, assessing risk, and defining the detection strategy and countermeasures implemented in this lab.
+
+---
 
 ## Threat Actor Profile
 
-| **Category** | **Description** | **Relevance to Lab** |
-|--------------|-----------------|---------------------|
-| **Adversary** | Opportunistic attacker | Primary focus - automated tools |
-| **Resources** | Low to moderate | Scripts, password lists |
-| **Sophistication** | Basic to intermediate | Common attack patterns |
-| **Objective** | Initial access | Credential compromise |
+| Attribute | Detail |
+|-----------|--------|
+| Type | Opportunistic — automated tooling against exposed authentication interfaces |
+| Sophistication | Basic to intermediate — widely available tools, low technical barrier |
+| Resources | Low to moderate — password lists, open-source attack frameworks |
+| Primary objective | Initial access via credential compromise |
+| Common tools | Hydra, Ncrack, Medusa, custom PowerShell scripts |
 
-## Attack Vector Analysis
+---
 
-### Primary Attack Path
-Reconnaissance → 2. Target Identification → 3. Brute-Force Attempt → 4. Successful Access → 5. Lateral Movement
+## Attack Path
 
+```
+Reconnaissance → Target Identification → Brute-Force Attempt → Successful Access → Lateral Movement
+```
 
-### Key Characteristics:
-- **Target:** Authentication interfaces (RDP, SSH, WinRM)
-- **Tools:** Hydra, Ncrack, custom PowerShell scripts
-- **Frequency:** Continuous automated attempts
-- **Velocity:** 5-20 attempts per minute per source
-- **Duration:** Minutes to days
+**Characteristics of the attack in this lab:**
+
+| Parameter | Value |
+|-----------|-------|
+| Target interfaces | RDP (3389), SSH (22), WinRM (5985) |
+| Attack velocity | 5–20 attempts per minute per source IP |
+| Duration | Minutes to days depending on lockout policy |
+| Variants | Password spraying, dictionary attack, credential stuffing |
+
+---
 
 ## MITRE ATT&CK Mapping
 
-### Technique: T1110.001 (Password Guessing)
-**Description:** Adversaries use brute-force techniques to guess passwords.
+| Technique | ID | Description |
+|-----------|-----|-------------|
+| Password Guessing | T1110.001 | Primary technique — automated attempts against a single account or set of accounts |
+| Password Spraying | T1110.003 | One common password tried across many accounts — evades per-account lockout |
+| Credential Stuffing | T1110.004 | Breach-sourced credential pairs tested against live services |
+| Valid Accounts | T1078 | End goal — successful authentication with a compromised credential |
+| Remote Services | T1021 | Attack surface — RDP, SSH, WinRM are the primary targets |
 
-**Procedure Examples in Lab:**
-1. **Password Spraying:** Common passwords across multiple accounts
-2. **Dictionary Attacks:** Wordlist-based password attempts
-3. **Credential Stuffing:** Reused credentials from breaches
-
-### Related Techniques:
-- **T1110.002** - Password Cracking (Post-compromise)
-- **T1078** - Valid Accounts (Goal of brute-force)
-- **T1021** - Remote Services (Target of attacks)
+---
 
 ## Risk Assessment
 
-### Impact Analysis
-| **Factor** | **Level** | **Justification** |
-|------------|-----------|-------------------|
-| **Confidentiality** | High | Successful attack exposes all account-accessible data |
-| **Integrity** | Medium | Account takeover enables data manipulation |
-| **Availability** | Low | Lockout policies mitigate service disruption |
-| **Business Impact** | High | Data breach, compliance violations, reputation damage |
+### Impact
 
-### Likelihood Assessment
-| **Factor** | **Score** | **Rationale** |
-|------------|-----------|---------------|
-| **Attack Frequency** | 9/10 | Most common initial access vector |
-| **Ease of Execution** | 8/10 | Tools widely available, low technical barrier |
-| **Detection Difficulty** | 4/10 | Basic detection exists, but tuning is challenging |
-| **Overall Likelihood** | High | 85% probability in 6-month period |
+| Factor | Level | Justification |
+|--------|-------|---------------|
+| Confidentiality | High | Successful compromise exposes all data accessible to the account |
+| Integrity | Medium | Account takeover enables data modification and malicious action |
+| Availability | Low | Account lockout policies limit service disruption as a side effect |
+| Business impact | High | Data breach, regulatory exposure, reputational damage |
+
+### Likelihood
+
+| Factor | Score | Rationale |
+|--------|-------|-----------|
+| Attack frequency | 9/10 | Most common initial access vector in enterprise environments |
+| Ease of execution | 8/10 | Tools widely available, minimal technical knowledge required |
+| Detection difficulty | 4/10 | Basic detection is achievable; evasion via slow or distributed attacks raises difficulty |
+| Overall likelihood | High | Frequent occurrence expected in any internet-exposed environment |
+
+---
 
 ## Detection Strategy
 
 ### Primary Detection Points
-1. **Authentication Logs:** Failed login attempts (Windows Event ID 4625)
-2. **Account Lockouts:** Security policy triggers (Event ID 4740)
-3. **Network Traffic:** Authentication protocol patterns
-4. **Temporal Analysis:** Unusual login times/frequencies
+
+| Signal | Source | Event |
+|--------|--------|-------|
+| Failed authentication volume | Windows Security Log | Event ID 4625 — An account failed to log on |
+| Account lockout | Windows Security Log | Event ID 4740 — A user account was locked out |
+| Linux auth failures | `/var/log/secure` | PAM authentication failure entries |
+| Network-layer patterns | Firewall / NSM | High-frequency auth protocol traffic from single source |
 
 ### Detection Challenges
-- **False Positives:** Legitimate user errors, service account issues
-- **Evasion Techniques:** Slow attacks, distributed sources
-- **Logging Gaps:** Missing or misconfigured log sources
 
-## Countermeasures Implemented
+**False positives:** Service accounts with cached stale credentials, legitimate users mistyping passwords, and monitoring tools that authenticate frequently can all produce 4625 noise. Threshold tuning per environment is required.
+
+**Evasion techniques:** Slow-and-low attacks (1–2 attempts per minute) stay under rate-based thresholds. Distributed attacks from botnets spread failures across hundreds of source IPs, defeating per-IP aggregation. Detection of these patterns requires longer time windows and cross-source correlation rather than simple count thresholds.
+
+**Logging gaps:** Misconfigured audit policies, missing Sysmon deployment, or agents not forwarding to SIEM create blind spots. Detection coverage depends entirely on log source completeness.
+
+---
+
+## Countermeasures
 
 ### Preventive Controls
-- Account lockout policies (5 attempts, 30-minute duration)
-- Strong password requirements
-- Multi-factor authentication (simulated in lab)
+
+| Control | Configuration |
+|---------|--------------|
+| Account lockout | 5 failed attempts triggers 30-minute lockout |
+| Password policy | Minimum length, complexity, and history requirements enforced |
+| MFA | Simulated in lab — in production, eliminates credential-only attack viability |
 
 ### Detective Controls
-- Real-time alerting on threshold breaches
-- Correlation with geographic anomalies
-- Integration with threat intelligence feeds
+
+| Control | Implementation |
+|---------|---------------|
+| Real-time alerting | Threshold-based alert on `failure_count > 10` per source IP per 15-minute window |
+| Geographic anomaly correlation | Alert on successful login from geography inconsistent with user baseline |
+| Threat intelligence integration | Source IP enrichment against known scanner and botnet feeds |
 
 ### Response Playbook
-1. **Alert triggers** → 2. **Investigation** → 3. **Containment** → 4. **Eradication** → 5. **Recovery**
+
+```
+1. Alert triggers (threshold breach)
+2. Investigate — decode source IP, correlate with threat intel, check for subsequent 4624 (successful logon)
+3. Contain — block source IP at firewall, disable affected account if compromise confirmed
+4. Eradicate — rotate credentials, review for persistence mechanisms (new accounts, scheduled tasks)
+5. Recover — re-enable account with new credentials, verify MFA enrollment
+6. Document — record IOCs, update detection thresholds based on findings
+```
+
+---
 
 ## Success Criteria
 
-### Detection Requirements
-- **Detection Rate:** >95% of brute-force attempts
-- **False Positive Rate:** <15% after tuning
-- **Mean Time to Detect:** <10 minutes
-- **Mean Time to Respond:** <30 minutes
+| Metric | Target |
+|--------|--------|
+| Detection rate | >95% of brute-force attempts detected |
+| False positive rate | <15% after threshold tuning |
+| Mean Time to Detect (MTTD) | <10 minutes |
+| Mean Time to Respond (MTTR) | <30 minutes |
 
 ### Validation Methods
-1. Controlled attack simulations
-2. Manual testing of detection logic
-3. Historical log analysis
-4. Peer review of detection rules
+
+- Controlled attack simulations against the lab environment using Hydra
+- Manual testing of SPL detection logic against known-malicious log samples
+- Historical log analysis to verify rule fires on past events
+- Peer review of detection thresholds and query logic
+
+---
 
 ## References
-- MITRE ATT&CK: T1110.001
-- NIST SP 800-53: IA-5, AC-7
-- CIS Controls: 5.1, 5.2, 5.3
+
+| Standard | Controls |
+|----------|---------|
+| MITRE ATT&CK | T1110.001, T1110.003, T1110.004, T1078, T1021 |
+| NIST SP 800-53 | IA-5 (Authenticator Management), AC-7 (Unsuccessful Logon Attempts) |
+| CIS Controls v8 | 5.1 (Establish Secure Config), 5.2 (Use Unique Passwords), 5.3 (Disable Dormant Accounts) |
