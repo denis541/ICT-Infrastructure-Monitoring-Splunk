@@ -1,9 +1,9 @@
 title: Account Creation and Immediate Use
-id: 7dfb4b44.b4nn4bn4bb4.nb6n7nbbnnrb8
+id: 7dfb4b44.b4nn4bn4.nb6n7nb.bnnrb8
 status: experimental
 description: Detects newly created accounts used shortly after creation
-author: [Your Name]
-date: 2024-01-01
+author: [Denis onduso]
+date: 2025-12-18
 tags:
   - attack.persistence
   - attack.t1136
