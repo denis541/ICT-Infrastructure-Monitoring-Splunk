@@ -2,9 +2,9 @@ title: Windows Brute Force Detection
 id: 12345678-1234-1234-1234-123456789012
 status: experimental
 description: Detects multiple failed Windows logins from a single source
-author: [Your Name]
-date: 2024-01-01
-modified: 2024-01-15
+author: [Denis Onduso]
+date: 2025-12-18
+modified: 2026-03-8
 tags:
   - attack.credential_access
   - attack.t1110.001
