@@ -2,8 +2,8 @@ title: Suspicious PowerShell Execution Patterns
 id: 87654321-4321-4321-4321-210987654321
 status: test
 description: Detects suspicious PowerShell execution patterns commonly used in attacks
-author: [Your Name]
-date: 2024-01-01
+author: [Denis Onduso]
+date: 2025-12-18
 tags:
   - attack.execution
   - attack.t1059.001
