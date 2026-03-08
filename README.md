@@ -126,5 +126,5 @@ Logging and monitoring configuration addresses the following requirements under 
 
 - [Detection Engineering Process](Detection_rules)
 - [False Positive Tuning Analysis](Docs/04_lessons_false_positives.md)
-- [Threat Model — T1110.001](docs/threat_model_bruteforce.md)
-- [Incident Response Playbook — Brute Force](playbooks/ir_playbook_bruteforce.md)
+- [Threat Model — T1110.001](Docs/01_threat_modeling_T1110.md)
+- [Incident Response Playbook — Brute Force](Playbooks/01-Incident_response.md)
