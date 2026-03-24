@@ -3,7 +3,7 @@
 ![Splunk](https://img.shields.io/badge/Tool-Splunk_Enterprise-000000?style=flat&logo=splunk&logoColor=white)       
 ![Platform](https://img.shields.io/badge/Platform-Windows_11-0078D4?style=flat&logo=windows&logoColor=white)       
 ![MITRE](https://img.shields.io/badge/MITRE-T1110_Brute_Force-E01B1B?style=flat&logoColor=white)  
- 
+  
 **Analyst:** Denis O. Onduso | [GitHub](https://github.com/denis541) | Denis.Onduso@outlook.com  
 **License:** MIT  
 
